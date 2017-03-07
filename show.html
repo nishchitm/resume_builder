@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Your Resume
+	</title>
+	<style type="text/css">
+		td{
+			padding: 20px 20px;
+    		margin: 8px 0;
+    		font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div align="center">
+		<h2 id="welcome_txt"></h2>
+		<table id="tab" border=2 style="border-collapse:collapse">
+		</table>
+	</div>
+	<script type="text/javascript">
+		(function(window, document, undefined){
+			document.getElementById("welcome_txt").textContent = "Welcome "+sessionStorage.getItem('user');
+			var arr = JSON.parse(localStorage.getItem('details'));
+			console.log(arr);
+			var flag=0;
+			var uname = sessionStorage.getItem('user');
+			
+			for(var j=0;j<arr.length;j++){
+				if(arr[j].uname==uname){
+					flag=1;
+					break;
+				}
+			}
+			if(flag==1){
+
+				var div = document.getElementById("det");
+				var tab = document.getElementById("tab");
+				var tr = document.createElement('tr');
+				var t1 = document.createElement('td');
+				var t2 = document.createElement('td');
+				var t3 = document.createElement('td');
+				var t4 = document.createElement('td');
+				var t5 = document.createElement('td');
+				var h1 = document.createElement('td');
+				var h2 = document.createElement('td');
+				var h3 = document.createElement('td');
+				var h4 = document.createElement('td');
+				var h5 = document.createElement('td');
+
+				var tr = document.createElement('tr');
+				var t6 = document.createElement('td');
+				t6.textContent = "Personal Details";
+				t6.setAttribute("colspan",4);
+				t6.setAttribute("style","font-weight:bold");
+				tr.appendChild(t6);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				t1.textContent = "Name";
+				t1.setAttribute("colspan",2);
+				tr.appendChild(t1);
+				h1.textContent = arr[j].name;
+				h1.setAttribute("colspan",2);
+				tr.appendChild(h1);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				t2.textContent = "Fathers name";
+				t2.setAttribute("colspan",2);
+				tr.appendChild(t2);
+				h2.textContent = arr[j].fname;
+				h2.setAttribute("colspan",2);
+				tr.appendChild(h2);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				t3.textContent = "Address";
+				t3.setAttribute("colspan",2);
+				tr.appendChild(t3);
+				h3.textContent = arr[j].address;
+				h3.setAttribute("colspan",2);
+				tr.appendChild(h3);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				t4.textContent = "Phone";
+				t4.setAttribute("colspan",2);
+				tr.appendChild(t4);
+				h4.textContent = arr[j].phone;
+				h4.setAttribute("colspan",2);
+				tr.appendChild(h4);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				t5.textContent = "Email";
+				t5.setAttribute("colspan",2);
+				tr.appendChild(t5);
+				h5.textContent = arr[j].email;
+				h5.setAttribute("colspan",2);
+				tr.appendChild(h5);
+				tab.appendChild(tr);
+
+				var tr = document.createElement('tr');
+				var t6 = document.createElement('td');
+				t6.textContent = "Education";
+				t6.setAttribute("colspan",4);
+				t6.setAttribute("style","font-weight:bold");
+				tr.appendChild(t6);
+				tab.appendChild(tr);
+
+
+				var tr = document.createElement('tr');
+				var t1 = document.createElement('td');
+				var t2 = document.createElement('td');
+				var t3 = document.createElement('td');
+				var t4 = document.createElement('td');
+
+				t1.textContent = "Name";
+				tr.appendChild(t1);
+				t2.textContent = "Qualification";
+				tr.appendChild(t2);
+				t3.textContent = "Year";
+				tr.appendChild(t3);
+				t4.textContent = "Board/University";
+				tr.appendChild(t4);
+
+				tab.appendChild(tr);
+
+				for(var i=0;i<3;i++){
+					var tr = document.createElement('tr');
+					var t1 = document.createElement('td');
+					var t2 = document.createElement('td');
+					var t3 = document.createElement('td');
+					var t4 = document.createElement('td');
+				
+					t1.textContent = arr[j].det[i].f1;
+					tr.appendChild(t1);
+
+					t2.textContent = arr[j].det[i].f4;
+					tr.appendChild(t2);
+
+					t3.textContent = arr[j].det[i].f2;
+					tr.appendChild(t3);
+
+					t4.textContent = arr[j].det[i].f3;
+					tr.appendChild(t4);
+
+					tab.appendChild(tr);
+				}
+			}
+			
+			
+		})(this, this.document);
+	</script>
+</body>
+</html>

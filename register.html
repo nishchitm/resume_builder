@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Register
+	</title>
+	<style type="text/css">
+		input[type=text], input[type=password], input[type=number]{
+		    width: 100%;
+		    padding: 12px 20px;
+		    margin: 8px 0;
+		    display: inline-block;
+		    border: 1px solid #ccc;
+		    box-sizing: border-box;
+		}
+		button{
+		    background-color: #105576;
+		    color: #FFF;
+		    padding: 14px 20px;
+		    margin: 8px 0;
+		    width: 50%;
+		}
+	</style>
+	</style>
+</head>
+<body>
+	<div align="center" style="padding-top: 100px">
+	<form style="width: 30%;background-color: white; align-self: center">
+		<label>
+			Name: 
+		</label>
+		<br>
+		<input type="text" name="name" id="name">
+		<br>
+		<label>
+			E-Mail: 
+		</label>
+		<input type="text" name="email" id="uname">
+		<br>
+		<label>
+			Password: 
+		</label>
+		<input type="password" name="pass" id="pass">
+		<br>
+		<label>
+			Phone Number: 
+		</label>
+		<input type="number" name="phone" id="phone">
+		<br>
+	</form>
+	<button id="Register_btn">
+		Submit
+	</button>
+	</div>
+	<script type="text/javascript">
+		
+		document.getElementById("Register_btn").addEventListener("click",function(event){
+			var a = document.getElementById("name").value;
+			var b = document.getElementById("uname").value;
+			var c = document.getElementById("pass").value;
+			var d = document.getElementById("phone").value;
+			if(a.length!=0 && b.length!=0 && c.length!=0 && d.length!=0){
+				var arr = JSON.parse(localStorage.getItem('users')) || [];
+				var flag=0;
+				for(var i=0;i<arr.length;i++){
+					if(arr[i].uname==b){
+						flag=1;
+						break;
+					}
+				}
+				if(flag==1){
+					alert("Email is already registered");
+				}else{
+					arr.push({
+						name: a,
+						email:b,
+						pass:c,
+						phone:d
+					});
+					localStorage.setItem('users',JSON.stringify(arr));
+					alert("Successfully Registered");
+					window.location = "login.html";
+				}
+			}else{
+				alert("Incomplete Form");
+			}
+		})
+	</script>
+</body>
+</html>

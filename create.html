@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Complete The Fields
+	</title>
+	<style type="text/css">
+		input[type=text], input[type=password], input[type=number]{
+		    width: 100%;
+		    padding: 12px 20px;
+		    margin: 8px 0;
+		    display: inline-block;
+		    border: 1px solid #ccc;
+		    box-sizing: border-box;
+		}
+		button{
+    		background-color: #105576;
+    		color: #FFF;
+    		padding: 20px 20px;
+    		margin: 8px 0;
+    		font-size: 15px;
+    		width: 20%;
+		}
+	</style>
+</head>
+<body>
+	
+	<div style="padding-left: 70px; padding-right: 70px;">
+	<h2 id="welcome_txt"></h2>
+	<table width="100%">
+		<tr>
+			<td>
+				<form>
+					<fieldset>
+						<legend>Personal Details</legend>
+						<label>Name: </label>
+						<input type="text" id="name">
+						<br>
+						<label>Email: </label>
+						<input type="text" id="email">
+						<br>
+						<label>Phone Number: </label>
+						<input type="number" id="phone">
+						<br>
+						<label>Father's Name: </label>
+						<input type="text" id="fname">
+						<br>
+						<label>Address Info: </label>
+						<input type="text" id="address">
+						<br>
+					</fieldset>
+				</form>
+			</td>
+			<td>
+				<form>
+					<fieldset>
+						<legend>Education Details</legend>
+						<form>
+							<fieldset>
+								<legend>10th Details: </legend>
+								<label>College/School name: </label>
+								<input type="text" id="first_school_name">
+								<br>
+								<label>Years: </label>
+								<input type="text" id="first_school_years">
+								<br>
+								<label>Board or University: </label>
+								<input type="text" id="first_school_board">
+							</fieldset>
+						</form>
+						<br>
+						<form>
+							<fieldset>
+								<legend>12th Details: </legend>
+								<label>College/School name: </label>
+								<input type="text" id="second_school_name">
+								<br>
+								<label>Years: </label>
+								<input type="text" id="second_school_years">
+								<br>
+								<label>Board or University: </label>
+								<input type="text" id="second_school_board">
+							</fieldset>
+						</form>
+						<br>
+						<form>
+							<fieldset>
+								<legend>College Details: </legend>
+								<label>College/School name: </label>
+								<input type="text" id="third_school_name">
+								<br>
+								<label>Years: </label>
+								<input type="text" id="third_school_years">
+								<br>
+								<label>Board or University: </label>
+								<input type="text" id="third_school_board">
+							</fieldset>
+						</form>
+					</fieldset>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div align="center">
+					<button id="submit" >
+						Create My Resume
+					</button>
+				</div>
+			</td>
+		</tr>
+	</table>		
+	</div>
+	<script type="text/javascript">
+		(function(window, document, undefined){
+
+			document.getElementById("welcome_txt").textContent = "Welcome "+sessionStorage.getItem('user');
+			document.getElementById('submit').addEventListener("click",function(event){
+				var name = document.getElementById("name").value;
+				var email = document.getElementById("email").value;
+				var phone = document.getElementById("phone").value;
+				var fname = document.getElementById("fname").value;
+				var address = document.getElementById("address").value;
+				var f1 = document.getElementById("first_school_name").value;
+				var f2 = document.getElementById("first_school_years").value;
+				var f3 = document.getElementById("first_school_board").value;
+				var s1 = document.getElementById("second_school_name").value;
+				var s2 = document.getElementById("second_school_years").value;
+				var s3 = document.getElementById("second_school_board").value;
+				var t1 = document.getElementById("third_school_name").value;
+				var t2 = document.getElementById("third_school_years").value;
+				var t3 = document.getElementById("third_school_board").value;
+
+				var uname = sessionStorage.getItem('user');;
+				if(f1.length==0 || f2.length==0 || f3.length==0 || s1.length==0 || s2.length==0 || s3.length==0 || t1.length==0 || t2.length==0 || t3.length==0 || name.length==0 || email.length==0 || phone.length==0 || fname.length==0 || address.length==0){
+					alert("Incomplete field");
+				}else{
+					var arr = JSON.parse(localStorage.getItem('details')) || [];
+					//var arr = new Array();
+					var flag=0;
+					var uname = sessionStorage.getItem('user');
+
+					for(var i=0;i<arr.length;i++){
+						if(arr[i].uname == uname){
+							flag=1;
+							break;
+						}
+					}
+
+					var det = new Array();
+					det.push({
+						f1:f1,
+						f2:f2,
+						f3:f3,
+						f4:"10th"
+					});
+					det.push({
+						f1:s1,
+						f2:s2,
+						f3:s3,
+						f4:"12th"
+					});
+					det.push({
+						f1:t1,
+						f2:t2,
+						f3:t3,
+						f4:"College"
+					});
+
+					if(flag==1){
+						arr[i] = {
+							uname:uname,
+							name:name,
+							email:email,
+							phone:phone,
+							fname:fname,
+							address:address,
+							det:det
+						};
+					}else{
+						arr.push({
+							uname:uname,
+							name:name,
+							email:email,
+							phone:phone,
+							fname:fname,
+							address:address,
+							det:det
+						});
+					}
+					
+					//sessionStorage.setItem('det',arr);
+					localStorage.setItem('details',JSON.stringify(arr));
+					alert("successfully saved");
+					window.location="show.html";
+				}
+			})
+		})(this, this.document);
+	</script>
+</body>
+</html>
